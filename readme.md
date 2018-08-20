@@ -1,6 +1,6 @@
 ## Select Order
 Select the optimal order of latent variables for PCA/ICA/PPCA/PICA/CCA.
-This is a public version of the original repository selectOrder. I've added simple demos that use the functions. Please contact me for help on getting this work. I'll be happy to help. 
+This is a public version of the original repository selectOrder, which is private. I've added simple demos that use the functions. Please contact me for help on getting this work. I'll be happy to help. 
 
 This tool-box contains a order selection algorithms for the linear admixture models ([see this link](https://github.com/idnavid/selectOrder/blob/master/notes/disecting_correlation.pdf)).
 Most existing methods (based on information-theoretic criteria, see [this document](https://github.com/idnavid/selectOrder/blob/master/notes/deriving_aic.pdf)) rely on the assumption that samples are 
