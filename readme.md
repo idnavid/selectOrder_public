@@ -1,5 +1,6 @@
 ## Select Order
 Select the optimal order of latent variables for PCA/ICA/PPCA/PICA/CCA.
+This is a public version of the original repository selectOrder. I've added simple demos that use the functions. Please contact me for help on getting this work. I'll be happy to help. 
 
 This tool-box contains a order selection algorithms for the linear admixture models ([see this link](https://github.com/idnavid/selectOrder/blob/master/notes/disecting_correlation.pdf)).
 Most existing methods (based on information-theoretic criteria, see [this document](https://github.com/idnavid/selectOrder/blob/master/notes/deriving_aic.pdf)) rely on the assumption that samples are 
@@ -21,7 +22,7 @@ This repository contains code for two types of algorithms:
 ### Python Requirements: 
 - `numpy`, `scipy`
 
-For experiments on real FMRI data: 
+Additionally, for experiments on real FMRI data: 
 - `nipype` (This automatically installs some pre-req modules, e.g., `nibabel`)
 - `nilearn`
 
@@ -35,7 +36,7 @@ and then run
 ### Matlab Requirements:
 - `Matlab`
 
-For direction-of-arrival simulations, I use [doa-tools](https://github.com/morriswmz/doa-tools.git). You can find a forked version [here](here!) in case @morriswmz changes the original. 
+For direction-of-arrival simulations in the CCA directory, I use [doa-tools](https://github.com/morriswmz/doa-tools.git). You can find a forked version [here](here!) in case @morriswmz changes the original. 
 
 NS, 2018
 
