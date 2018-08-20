@@ -1,0 +1,86 @@
+\documentclass[10pt,technote,peerreview]{IEEEtran}
+\usepackage{enumerate}   
+\usepackage{adjustbox}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{lineno,hyperref}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{amsfonts,euscript,amsbsy}
+\usepackage{latexsym}
+\usepackage{subfigure}
+
+
+\newcommand{\R}{\mathbb{R}}
+
+\usepackage{amsmath}
+
+\begin{document}
+\title{Dissecting Low-Rank Correlation Matrix}
+\author{Navid Shokouhi}
+\maketitle
+
+\label{appendix}
+In most existing studies on model order selection, the fundamental assumption is that a low rank covariance matrix is buried in white Gaussian noise. Such a covariance is obtained from the following linear model for the observed data: 
+\begin{equation}
+{\bf x} = {\bf As} + {\bf n},
+\end{equation}
+where ${\bf x}$ is an $n$-dimensional observation vector, ${\bf A}$ is an $n\times p$ linear mixing matrix, ${\bf s}$ is the $p$-dimensional signal (to be modeled), and ${\bf n}$ is white Gaussian noise, $\mathcal{N}({\bf 0},\sigma^2\textbf{I}_n)$. The assumption used in calculating the log-likelihood function of the observation given a model order (more precisely, given the model) is that the full-rank covariance matrix ${\bf R}_x$ of the observations can be modeled as: 
+
+\begin{equation}
+	\label{eq:main_corr_disection}
+	{\bf R}_x = {\bf U}_p(\boldsymbol{\Lambda} - \sigma^2\textbf{I}_p){\bf U}^T_p + \sigma^2\textbf{I}_n.
+\end{equation}
+where ${\bf U}_p$ contains the top $p$ eigenvectors of ${\bf R}_x$, and $\boldsymbol{\Lambda}$ contains its top $p$ eigenvalues. The objective of this document is to derive Eq.~(\ref{eq:main_corr_disection}) starting from the assumption that the eigenvalue decomposition of ${\bf R}_x$ comprises of $p$ large values corresponding to the signal and $n-p$ small values corresponding to the noise. 
+
+\begin{equation}
+{\bf R}_x = {\bf U}
+\begin{pmatrix}
+\boldsymbol{\Lambda} & {\bf 0}\\
+{\bf 0}				 & \sigma^2\textbf{I}_{n-p}\\
+\end{pmatrix}
+{\bf U}^T,
+\end{equation}
+where $\boldsymbol{\Lambda}$ is a diagonal $p\times p$ matrix containing the signal eigenvalues. ${\bf U}$ contains all of the eigenvectors of ${\bf R}_x$. We can split ${\bf U}$ by its columns, where the first $p$ correspond to $\boldsymbol{\Lambda}$. 
+
+\begin{equation}
+\nonumber
+{\bf R}_x = \big({\bf U}_p {\bf U}_{n-p}\big)
+\begin{pmatrix}
+\boldsymbol{\Lambda} & {\bf 0}\\
+{\bf 0}				 & \sigma^2\textbf{I}_{n-p}\\
+\end{pmatrix}
+\begin{pmatrix}
+{\bf U}_p^T\\ 
+{\bf U}_{n-p}^T\\ 
+\end{pmatrix}.
+\end{equation}
+The matrices ${\bf U}_p$ and ${\bf U}_{n-p}$ are $n\times p$ and $n\times (n-p)$, respectively. Calculating the matrix multiplications:
+\begin{eqnarray}
+\nonumber
+{\bf R}_x = \big({\bf U}_p\boldsymbol{\Lambda}\hspace{2mm} \sigma^2 {\bf U}_{n-p}\big)
+\begin{pmatrix}
+{\bf U}_p^T\\ 
+{\bf U}_{n-p}^T\\ 
+\end{pmatrix} \\
+& 
+\hspace{-5.2cm}= {\bf U}_p\boldsymbol{\Lambda}{\bf U}_p^T+\sigma^2{\bf U}_{n-p}{\bf U}_{n-p}^T
+\end{eqnarray}
+We know that the eigenvector matrix ${\bf U}$ is orthonormal, ${\bf U}{\bf U}^T = \textbf{I}_n$, therefore: 
+\begin{equation}
+\textbf{I}_n = {\bf U}_{n}{\bf U}_{p}^T + {\bf U}_{n-p}{\bf U}_{n-p}^T.
+\end{equation}
+Replacing ${\bf U}_{n-p}{\bf U}_{n-p}^T$ with $\textbf{I}_n - {\bf U}_{p}{\bf U}_{p}^T$: 
+\begin{eqnarray}
+ {\bf R}_x = {\bf U}_p\boldsymbol{\Lambda}{\bf U}_p^T+\sigma^2\textbf{I}_n - \sigma^2{\bf U}_{p}{\bf U}_{p}^T\\
+ &\hspace{-5.2cm} = {\bf U}_p(\boldsymbol{\Lambda} - \sigma^2\textbf{I}_p){\bf U}^T_p + \sigma^2\textbf{I}_n.
+\end{eqnarray}
+
+\bibliographystyle{IEEETran}
+\bibliography{refs}
+
+\end{document}
+
+

@@ -1,0 +1,216 @@
+\documentclass[10pt,technote,peerreview]{IEEEtran}
+\usepackage{enumerate}   
+\usepackage{adjustbox}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{lineno,hyperref}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{amsfonts,euscript,amsbsy}
+\usepackage{latexsym}
+\usepackage{subfigure}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bSigma}{\boldsymbol{\Sigma}}
+\newcommand{\mM}{\mathcal{M}}
+\newcommand{\mL}{\mathcal{L}}
+\usepackage{amsmath}
+
+\begin{document}
+\title{The Akaike Information Criterion for Model Order Selection in Gaussian Data}
+\author{Navid Shokouhi}
+\maketitle
+
+\label{appendix}
+The Akaike information criterion (AIC) is the most popular objective function for model selection. AIC uses the principle of Maximum Likelihood, which is equivalent to minimizing the Kullback Leibler divergence (KL-divergence) between the true probability density function (pdf), $f({\bf x}_1,\dots,{\bf x}_N)$, and the parametric pdf corresponding to the model, $\mM$, $f({\bf x}_1,\dots,{\bf x}_N|\mM)$~\cite{akaike1998information}. This document presents a step-by-step derivation of AIC for $N$ multivariate iid samples of dimension $p$, ${\bf x}_i\in\R^p$, with Gaussian distribution, ${\bf x}_i\sim\mathcal{N}({\bf 0},\bSigma)$. The fact that ${\bf x}_i$ are zero-mean does not effect the generality of the problem and is only for convenience. When possible, we will use the $p\times N$ matrix ${\bf X} = \left[{\bf x}_1\dots{\bf x}_N\right]$ to represent the data.
+\\
+
+The conditions imposed on the data are the same as those described in~\cite{waxandkailath1985}. It is assumed that $\bSigma$ has $q$ large eigenvalues ($\lambda_1>\lambda_2>\dots>\lambda_q$). The remaining $p-q$ eigenvalues are assumed to be equal $\lambda_q > \lambda_{q+1}=\lambda_{q+2}=\dots\lambda_p$. The value $q$ is called the model order. AIC is described for a much broader class of data and is defined as: 
+
+\begin{equation}
+AIC(k) = -2\mL({\bf X}|\mM_k) + 2\gamma_k
+\end{equation}
+where $\mL({\bf X}|\mM_k)$ denotes the data log-likelihood for the model $\mM_k$, which corresponds to $k$ large eigenvalues. The variable $\gamma_k$ is the degree of freedom of $\mM_k$. Under the right conditions, $AIC(k)$ has a minimum at $k=q$. For iid samples, $\mL({\bf X})$, can be separated as: 
+\begin{equation}
+\mL({\bf X}|\mM_k) = \log(f({\bf x}_1|\mM_k))+\dots+\log(f({\bf x}_N|\mM_k)) = \sum_{i=1}^{N}\log(f({\bf x}_i|\mM_k))
+\end{equation}
+for Gaussian distributions, using the trace operation, $tr(.)$:
+\begin{equation}
+f({\bf x}_i|\mM_k) = \frac{1}{\left|2\pi\bSigma\right|^{1/2}}\exp\left(-\frac{1}{2}tr\left(\bSigma^{-1}{\bf x}_i{\bf x}_i^T\right)\right)
+\end{equation}
+\begin{equation}
+\implies \mL({\bf X}|\mM_k) = -\frac{pN}{2}\log(2\pi) -\frac{N}{2}\log\left(\left|\bSigma\right|\right) - \frac{N}{2}tr(\bSigma^{-1}{\bf S}),
+\end{equation}
+where ${\bf S}=\frac{1}{N}\sum_{i=1}^{N}{\bf x}_i{\bf x}_i^T$ is the sample covariance matrix. 
+In order to calculate $\mL({\bf X}|\mM_k)$, we must know the covariance, $\bSigma$. Since $\bSigma$ is generally not available, we can use the maximum likelihood estimate of $\bSigma$, which is represented through its eigenvalue decomposition, $\bSigma = {\bf U}{\bf D}{\bf U}^T$. 
+\begin{equation}
+\mL({\bf X}|\mM_k) = -\frac{Np}{2}\log(2\pi) - \frac{N}{2}\log
+\left|
+{\bf U}
+\begin{pmatrix}
+\boldsymbol{\Lambda} & {\bf 0}\\
+{\bf 0}				 & \sigma^2\textbf{I}_{p-k}\\
+\end{pmatrix}
+{\bf U}^T\right|
+-\frac{N}{2}tr\left({\bf S}
+{\bf U}
+\begin{pmatrix}
+\boldsymbol{\Lambda}^{-1} & {\bf 0}\\
+{\bf 0}				 & \sigma^{-2}\textbf{I}_{p-k}\\
+\end{pmatrix}
+{\bf U}^T\right)
+\end{equation}
+where $\boldsymbol{\Lambda}$ is the $k\times k$ diagonal matrix containing the first $k$ eigenvalues and $\sigma^2$ is the value assigned to the last $p-k$ eigenvalues. Using the fact that ${\bf U}$ is unitary (i.e., $|{\bf U}|=|{\bf U}^T|=1$):
+\begin{flalign}
+\label{eq:llk_1}
+\mL({\bf X}|\mM_k)= &
+-\frac{Np}{2}\log(2\pi)
+- \frac{N}{2}\log\left(
+\prod_{j=1}^{k}\lambda_j 
+\prod_{j=k+1}^{p}\sigma^2
+\right)
+-\frac{N}{2}tr
+\left(
+{\bf S}
+{\bf U}
+\begin{pmatrix}
+\boldsymbol{\Lambda}^{-1} & {\bf 0}\\
+{\bf 0}				 & \sigma^{-2}\textbf{I}_{p-k}\\
+\end{pmatrix}
+{\bf U}^T\right) \\
+= &
+-\frac{Np}{2}\log(2\pi) 
+- \frac{N}{2}\sum_{j=1}^{k}\log(\lambda_j)
+- \frac{N}{2}(p-k)\log(\sigma^2)
+-\frac{N}{2}tr
+\left(
+{\bf S}
+{\bf U}
+\begin{pmatrix}
+\boldsymbol{\Lambda}^{-1} & {\bf 0}\\
+{\bf 0}				 & \sigma^{-2}\textbf{I}_{p-k}\\
+\end{pmatrix}
+{\bf U}^T\right)
+\end{flalign}
+
+Maximizing $\mL({\bf X}|\mM_k)$ with respect to $\lambda_j$, $\sigma^2$, and ${\bf U}$, will result in the maximum likelihood estimation. Here, we will only maximize with respect to $\lambda_j$ and $\sigma^2$. Maximizing with respect to the eigenvectors (i.e., columns of ${\bf U}$) is a fairly tedious exercise. Without derivation, we use~\cite{anderson}, which shows that the maximum likelihood of ${\bf {U}}$ is ${\bf V}$, where ${\bf V}$ is the matrix of eigenvectors of the sample covariance matrix, ${\bf S}$). 
+
+for $\lambda_j$:
+\begin{equation}
+\frac{\partial \mL({\bf X}|\mM_k)}{\partial \lambda_j} = 0 - \frac{N}{2}\frac{1}{\lambda_j}  - 0 
+- \frac{N}{2}tr
+\left(
+{\bf S}
+\left[
+\frac{-1}{\lambda_j^2}{\bf u}_j{\bf u}_j^T
+\right]
+\right)=0,
+\end{equation}
+where ${\bf u}_j$ is the $j^{th}$ column of ${\bf U}$. 
+\begin{equation}
+-\frac{1}{\lambda_j} + \frac{1}{\lambda_j^2}{\bf u}_j^T{\bf S}{\bf u}_j = 0,
+\end{equation}
+which results in $\lambda_j{\bf u}_j = {\bf S}{\bf u}_j$. Therefore, the maximum likelihood estimate of $\lambda_j$, by definition, is the $j^{th}$ eigenvalue of ${\bf S}$ ($\hat{\lambda_j}=l_j$).  
+
+for $\sigma^2$:
+\begin{equation}
+\nonumber
+\frac{\partial \mL({\bf X}|\mM_k)}{\partial \sigma^2} = 0 - 0  - \frac{N}{2}\frac{1}{\sigma^2}  
+- \frac{N}{2}tr
+\left(
+{\bf S}
+\left[
+\frac{-1}{(\sigma^2)^2}\sum_{j = k+1}^{p}{\bf u}_j{\bf u}_j^T
+\right]
+\right)=0
+\end{equation}
+\begin{flalign}
+\nonumber
+\implies (p-k)\frac{1}{\sigma^2} = \frac{1}{(\sigma^2)^2}tr({\bf S}\sum_{j=k+1}^{p}{\bf u}_j{\bf u}_j^T) \\
+\nonumber
+& \hspace{-6cm}\implies \sigma^2 = \frac{1}{p-k}\sum_{j=k+1}^{p}tr({\bf S}{\bf u}_j{\bf u}_j^T) \\
+& \hspace{-6cm}\implies \sigma^2 = \frac{1}{p-k}\sum_{j=k+1}^{p}{\bf u}_j^T{\bf S}{\bf u}_j
+\end{flalign}
+where ${\bf u}_j^T{\bf S}{\bf u}_j$ gives the last $p-k$ eigenvalues of ${\bf S}$. Therefore, the maximum likelihood estimate of $\sigma^2$ is: 
+\begin{equation}
+\label{eq:sigma_hat}
+\hat{\sigma^2} = \frac{1}{p-m}\sum_{j=k+1}^{p}l_j
+\end{equation}
+\\
+
+The final step of deriving $AIC(k)$ is to insert the maximum likelihood estimates in $\mL({\bf X}|\mM_k)$ in Eq.~(\ref{eq:llk_1}). 
+\begin{eqnarray}
+\nonumber
+\hspace{-0.5cm}
+\mL({\bf X}|\mM_k)= &\hspace{-6cm}
+-\frac{Np}{2}\log(2\pi)
+- \frac{N}{2}\log\left(
+\prod_{j=1}^{k}\lambda_j 
+\prod_{j=k+1}^{p}\hat{\sigma}^2
+\right)
+-\frac{N}{2}tr
+\left(
+{\bf V}
+{\bf L}
+{\bf V}^T
+{\bf V}
+\hat{\bf D}^{-1}
+{\bf V}^T
+\right) \\
+& 
+\nonumber
+\hspace{-.7cm} = 
+-\frac{Np}{2}\log(2\pi)
+- \frac{N}{2}\log
+\left(
+\prod_{j=1}^{k}l_j 
+\prod_{j=k+1}^{p}\left(\frac{1}{p-k}\sum_{j=k+1}^{p}l_j\right)
+\right)
+-\frac{N}{2}tr
+\left(
+{\bf V}
+\begin{pmatrix}
+\boldsymbol{I}_k & {\bf 0}\\
+{\bf 0}				 & 
+\begin{pmatrix}
+\hat{\sigma^{-2}}l_1 & & & {\bf 0}\\
+ & . \\
+ &\hspace{6mm} . \\
+ &&  . \\
+{\bf 0} & & & \hat{\sigma^{-2}}l_2 &\\
+\end{pmatrix}
+\\
+\end{pmatrix}
+{\bf V}^T
+\right) \\ \\
+& \hspace{-5.6cm}
+= -\frac{Np}{2}\log(2\pi)
+- \frac{N}{2}\log
+\left(
+\prod_{j=1}^{k}l_j 
+\prod_{j=k+1}^{p}\left(\frac{1}{p-k}\sum_{j=k+1}^{p}l_j\right)
+\right)
+-\frac{N}{2}(k + \frac{1}{\hat{\sigma^2}}\sum_{j = k+1}^{p}l_j)
+\end{eqnarray}
+where we have used the property of the trace operation, $tr({\bf VSV}^T) = tr({\bf SV}^T{\bf V})$. Finally, from Eq.~(\ref{eq:sigma_hat}), we have $\frac{1}{\hat{\sigma^2}}\sum_{j = k+1}^{p}l_j = p-k$. 
+Therefore, 
+\begin{equation}
+\mL({\bf X}|\mM_k) = 
+-\frac{Np}{2}\left(\log(2\pi) + 1\right)
+- \frac{N}{2}\log
+\left(
+\left(\frac{1}{p-k}\sum_{j=k+1}^{p}l_j\right)^{(p-k)}
+\prod_{j=1}^{k}l_j 
+\right)
+\end{equation}
+
+Compare this with the result presented in~\cite{waxandkailath1985}.
+\bibliographystyle{IEEETran}
+\bibliography{refs}
+
+\end{document}
+
+
