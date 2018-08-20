@@ -2,22 +2,20 @@
 Select the optimal order of latent variables for PCA/ICA/PPCA/PICA/CCA.
 This is a public version of the original repository selectOrder, which is private. I've added simple demos that use the functions. Please contact me for help on getting this work. I'll be happy to help. 
 
-This tool-box contains a order selection algorithms for the linear admixture models ([see this link](https://github.com/idnavid/selectOrder/blob/master/notes/disecting_correlation.pdf)).
-Most existing methods (based on information-theoretic criteria, see [this document](https://github.com/idnavid/selectOrder/blob/master/notes/deriving_aic.pdf)) rely on the assumption that samples are 
-independent and identitically distributed. The proposed algorithm used here is not based on the likelihood function, and therefore 
+This tool-box contains order selection algorithms for the linear admixture models ([see this link](https://github.com/idnavid/selectOrder/blob/master/notes/disecting_correlation.pdf)).
+Most existing methods are based on information-theoretic criteria, see [this document](https://github.com/idnavid/selectOrder/blob/master/notes/deriving_aic.pdf) and typically use the log-likelihood fucntion. The proposed algorithm used here is not based on the likelihood function, and therefore 
 has been shown to produce more consistent results. 
 
-For more detail, please see our paper in IEEE TMI:<br/>
-*Seghouane, Shokouhi, "Consistent Esitmaiton of Dimensionality for Data Driven Methods in fMRI Analysis", IEEE Transactions on Medical Imaging, 2018.*
-
 ### Citations:
-Please make sure to cite the our paper. 
+Please make sure to cite the our paper:
+
+*Seghouane, Shokouhi, "Consistent Esitmaiton of Dimensionality for Data Driven Methods in fMRI Analysis", IEEE Transactions on Medical Imaging, 2018.*
 
 
 ### Description
 This repository contains code for two types of algorithms: 
-- single-vector factor analysis (e.g., PCA) [`Python`](here!) and [`Matlab`](here!)
-- double-vector analysis (e.g., CCA) [`Matlab`](here!)
+- single-vector factor analysis models (e.g., PCA) [`Python`](https://github.com/idnavid/selectOrder_public/tree/master/code/standard/python) and [`Matlab`](https://github.com/idnavid/selectOrder_public/tree/master/code/standard/matlab)
+- double-vector analysis (e.g., CCA) [`Matlab`](https://github.com/idnavid/selectOrder_public/tree/master/code/cca/matlab)
 
 ### Python Requirements: 
 - `numpy`, `scipy`
@@ -34,9 +32,9 @@ and then run
 `pip install <location of trait wheel file>.whl`
 
 ### Matlab Requirements:
-- `Matlab`
+- `Matlab` version at the time of publishing this code was 2017b
 
-For direction-of-arrival simulations in the CCA directory, I use [doa-tools](https://github.com/morriswmz/doa-tools.git). You can find a forked version [here](here!) in case @morriswmz changes the original. 
+For direction-of-arrival simulations in the CCA directory, I use [doa-tools](https://github.com/morriswmz/doa-tools.git). You can find a forked version [here](https://github.com/idnavid/doa-tools) in case @morriswmz changes the original. 
 
 NS, 2018
 
