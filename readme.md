@@ -36,5 +36,8 @@ and then run
 
 For direction-of-arrival simulations in the CCA directory, I use [doa-tools](https://github.com/morriswmz/doa-tools.git). You can find a forked version [here](https://github.com/idnavid/doa-tools) in case @morriswmz changes the original. 
 
+
+
+Thanks for showing interest. For more code/projects, please visit [my page](https://idnavid.github.io). 
 NS, 2018
 
