@@ -9,7 +9,7 @@ has been shown to produce more consistent results.
 ### Citations:
 Please make sure to cite the our paper:
 
-*Seghouane, Shokouhi, "Consistent Esitmaiton of Dimensionality for Data Driven Methods in fMRI Analysis", IEEE Transactions on Medical Imaging, 2018.*
+##### *Seghouane, Shokouhi, "Consistent Esitmaiton of Dimensionality for Data Driven Methods in fMRI Analysis", IEEE Transactions on Medical Imaging, 2018.* ** 
 
 
 ### Description
